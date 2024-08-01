@@ -1,9 +1,7 @@
 # Overview
 
 ## Running
-From the root of the monorepo, run `docker-compose up --build`. This starts the db and the backend server.
-
-Then, cd into `src/app` and run `pnpm run dev`. This will start the frontend.
+From the root of the monorepo, run `docker-compose up --build`. This starts the frontend, db and the backend server.
 
 From there, enter any URL from Garage into the input field and check out the PDF that auto-downloads.
 
@@ -43,6 +41,5 @@ This makes it super easy to add new api clients on the frontend, and to define A
 
 ## Improvements
 Things I would do If I had more time:
-1. Dockerize frontend so the entire app can be run with `docker-compose up --build`. There is a Dockerfile for the frontend, so this wouldnt take much more time to orchestrate
-2. More robust frontend, including basic auth and multiple pages. I would also probably add some more features to the invoice generator, although I think that a "dumb" UI for this project is fine (simple UX, doesn't over-complicate things)
-3. Unit testing (I take this very seriously in a production environment but decided the tradeoff on no unit tests here was worth it)
+1. More robust frontend, including basic auth and multiple pages. I would also probably add some more features to the invoice generator, although I think that a "dumb" UI for this project is fine (simple UX, doesn't over-complicate things)
+2. Unit testing (I take this very seriously in a production environment but decided the tradeoff on no unit tests here was worth it)
