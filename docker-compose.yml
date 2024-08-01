@@ -34,6 +34,15 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+  frontend:
+    container_name: frontend
+    build:
+      context: ./src/app
+      dockerfile: Dockerfile
+    depends_on:
+      - server
+    ports:
+      - "5173:5173"
 
 volumes:
   postgres_data:

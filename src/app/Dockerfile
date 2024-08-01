@@ -1,22 +1,24 @@
-# Use an official node image as a base
-FROM node:18
+# Use an official Node.js image as the base
+FROM node:22 AS build
 
-# Install pnpm globally
-RUN npm install -g pnpm
-
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml vite.config.ts ./
+# Copy pnpm lockfile and package.json
+COPY pnpm-lock.yaml ./
+COPY package.json ./
 
-# Install dependencies using pnpm
+# Install pnpm
+RUN npm install -g pnpm
+
+# Install dependencies
 RUN pnpm install
 
-# Copy the rest of the application code
+# Copy the rest of the application
 COPY . .
 
-# Expose the port your app runs on
 EXPOSE 5173
 
-# Start the application using pnpm
-CMD ["pnpm", "run", "dev"]
+# Run the application
+CMD ["pnpm", "run", "dev","--","--host","0.0.0.0"]
+
