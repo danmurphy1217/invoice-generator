@@ -1,0 +1,39 @@
+services:
+  server:
+    container_name: server
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    healthcheck:
+      # if curl request fails, exit with status 1
+      test: curl --fail http://127.0.0.1:8080/ping || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=testdb
+    volumes:
+      - ./:/src/backend/app
+  db:
+    container_name: db
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

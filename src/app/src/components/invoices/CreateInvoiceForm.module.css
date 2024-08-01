@@ -1,0 +1,21 @@
+  
+.formsContainer {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 100%;
+}
+
+.invoiceForm {
+    width: 21.875rem; /* 300px converted to rem */
+    padding: 3.125% 3.125% 3.125% 3.125%; /* 20px converted to percentage */
+    border: none;
+    border-radius: 3.125%; /* 5px converted to percentage */
+  }
+
+  .invoiceForm h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2rem;
+  }

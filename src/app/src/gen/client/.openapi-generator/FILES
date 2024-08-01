@@ -1,0 +1,8 @@
+.gitignore
+.openapi-generator-ignore
+src/index.ts
+src/models/ApiModelsApiResponse.ts
+src/models/ApiModelsGenerateInvoiceHandlerRequest.ts
+src/models/ApiModelsHealthCheckResponse.ts
+src/runtime.ts
+tsconfig.json

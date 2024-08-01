@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# If any command fails, exit immediately with that command's exit status
+set -eo pipefail
+
+ROOT_DIR=$(git rev-parse --show-toplevel)
+CHANGED_FILES=$(git diff --staged --name-only -- "$ROOT_DIR"/src/backend)
+
+get_pattern_files() {
+    pattern=$(echo "$*" | sed "s/ /\$\\\|/g")
+    echo "$CHANGED_FILES" | { grep "$pattern$" || true; }
+}
+GO_FILES=$(get_pattern_files .go)
+TS_FILES=$(get_pattern_files .ts)
+
+cleanup() {
+  exit_code=$?
+  if [[ ${exit_code} -eq 1 ]]; then
+    diff_file="$(echo "$GO_FILES" | tr '\n' ' ')"
+    echo "run autopep8 $diff_file -i to fix"
+    exit $exit_code
+  fi
+}
+
+if [[ -n "$GO_FILES" ]]; then
+    echo "Linting Go Files"
+fi
+
+if [[ -n "$TS_FILES" ]]; then
+    echo "Linting TS Files"
+fi

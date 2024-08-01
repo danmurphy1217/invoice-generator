@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api_models;
+
+option go_package = "backend/gen";
+
+// The HealthCheck service definition.
+service HealthCheckService {
+    // Health check method
+    rpc HealthCheck (HealthCheckRequest) returns (HealthCheckResponse);
+}
+
+// The request message containing no data.
+message HealthCheckRequest {}
+
+// The response message containing the health status.
+message HealthCheckResponse {
+    bool healthy = 1 [json_name="healthy"];;
+}
+
+
+message ApiResponse {
+    int32 status_code = 1; // Status code of the response
+    string message = 2;    // Additional message or error details
+  }
+
+
+// Message for the request to generate an invoice
+message GenerateInvoiceHandlerRequest {
+    string truckId = 1 [json_name="truckId"];
+}

@@ -1,0 +1,46 @@
+{
+  "openapi": "3.0.1",
+  "components": {
+    "schemas": {
+      "api_models.ApiResponse": {
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "statusCode": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "api_models.GenerateInvoiceHandlerRequest": {
+        "description": "Message for the request to generate an invoice",
+        "properties": {
+          "truckId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "api_models.HealthCheckRequest": {
+        "description": "The request message containing no data.",
+        "type": "object"
+      },
+      "api_models.HealthCheckResponse": {
+        "description": "The response message containing the health status.",
+        "properties": {
+          "healthy": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "OpenAPI Spec for Solo APIs.",
+    "version": "api_models"
+  },
+  "paths": {}
+}

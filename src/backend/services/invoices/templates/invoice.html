@@ -1,0 +1,20 @@
+<html>
+
+<head>
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="./services/invoices/templates/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ .Title }}</h1>
+        <div class="image-container">
+            <img src="{{.ImageURL}}" alt="Image">
+        </div>
+        <p class="description">{{ .Description }}</p>
+        <p class="price"><strong>Price: </strong>{{ .Price }}</p>
+        <p class="description"><strong>Contact Info: </strong>{{ .SupportEmail }}</p>
+    </div>
+</body>
+
+</html>
