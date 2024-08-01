@@ -94,7 +94,6 @@ func GenerateInvoiceHandler(w http.ResponseWriter, r *http.Request) {
     }
 
     w.Header().Set("Content-Type", "application/pdf")
-    w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s.pdf", respGetListing.Result.Listing.ListingTitle))
     w.WriteHeader(http.StatusCreated)
     w.Write(invoiceBytes)
 }
