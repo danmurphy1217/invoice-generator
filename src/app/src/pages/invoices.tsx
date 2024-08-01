@@ -12,6 +12,11 @@ const CreateInvoicePage: React.FC = () => {
   const [createInvoice, { isLoading, isError }] = useCreateInvoiceMutation();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const isValidGarageURL = (url: string): boolean => {
+    const regex = /^https?:\/\/www\.withgarage\.com\/listing\/.*-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+    return regex.test(url);
+  }
+
   const handleDownload = async (response: Blob) => {
       console.log("response", response)
       // Create a URL for the blob
@@ -34,6 +39,13 @@ const CreateInvoicePage: React.FC = () => {
     e.preventDefault();
     if (truckLink != "") {
       setErrorMessage(null);
+
+      // ensure that the link is a valid garage truck link
+      if (!isValidGarageURL(truckLink)) {
+        setErrorMessage(`Invalid Link: ${truckLink}`);
+        return
+      }
+
       const truckId = truckLink.split('-').slice(-5).join('-')
       try {
           const msg: ApiModelsGenerateInvoiceHandlerRequest = {
@@ -42,6 +54,7 @@ const CreateInvoicePage: React.FC = () => {
           const blob = await createInvoice(msg).unwrap();
           if (isError) {
             setErrorMessage(`Could Not Fetch Truck for Link: ${truckId}`);
+            return
           } else {
             setErrorMessage(null); // Clear previous error message if successful
             console.log("handling download now");
@@ -50,6 +63,7 @@ const CreateInvoicePage: React.FC = () => {
         } catch (err) {
           setErrorMessage(`Could Not Fetch Truck for Link: ${truckId}`);
           console.error(`error when creating invoice: ${err}`);
+          return
         }
       }
   }
