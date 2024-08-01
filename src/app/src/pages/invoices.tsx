@@ -33,12 +33,12 @@ const CreateInvoicePage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (truckLink != "") {
+      setErrorMessage(null);
       const truckId = truckLink.split('-').slice(-5).join('-')
       try {
           const msg: ApiModelsGenerateInvoiceHandlerRequest = {
             truckId: truckId,
           }
-          console.log("sending request");
           const blob = await createInvoice(msg).unwrap();
           if (isError) {
             setErrorMessage(`Could Not Fetch Truck for Link: ${truckId}`);
